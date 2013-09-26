@@ -1,0 +1,9 @@
+[color]
+	ui = auto
+[user]
+	name = Piyush Nimbalkar
+	email = piyushmnimbalkar@gmail.com
+[alias]
+	pr = pull --rebase
+[push]
+	default = upstream
