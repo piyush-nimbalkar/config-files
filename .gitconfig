@@ -9,5 +9,8 @@
 	st = status
 	lg = log --graph --pretty=oneline --abbrev-commit
 	prs = !git stash save && git pull --rebase && git stash pop && echo 'Success!'
+	br = branch
+	last = log -1 HEAD
+	unstage = reset HEAD --
 [push]
 	default = upstream
