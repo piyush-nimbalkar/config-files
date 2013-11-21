@@ -5,5 +5,9 @@
 	email = piyushmnimbalkar@gmail.com
 [alias]
 	pr = pull --rebase
+	co = checkout
+	st = status
+	lg = log --graph --pretty=oneline --abbrev-commit
+	prs = !git stash save && git pull --rebase && git stash pop && echo 'Success!'
 [push]
 	default = upstream
