@@ -69,6 +69,7 @@ alias emacs-terminal='emacs -nw'
 alias emacs='emacs'
 alias sl='sl'
 alias gs='git status'
+alias cpr='rsync -av --progress'
 
 export EDITOR='emacsclient -t'
 export VISUAL='emacsclient -t'
