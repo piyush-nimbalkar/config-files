@@ -7,10 +7,11 @@
 	pr = pull --rebase
 	co = checkout
 	st = status
-	lg = log --graph --pretty=oneline --abbrev-commit
+	ll = log --oneline --graph --decorate
 	prs = !git stash save && git pull --rebase && git stash pop && echo 'Success!'
 	br = branch
 	last = log -1 HEAD
 	unstage = reset HEAD --
+	lol = log --oneline --graph --decorate --all
 [push]
 	default = upstream
