@@ -70,6 +70,21 @@ alias emacs='emacs'
 alias sl='sl'
 alias gs='git status'
 alias cpr='rsync -av --progress'
+alias ....='cd ../../..'
+alias moo='fortune | cowthink'
+alias vssh='vagrant ssh'
+alias vup='vagrant up'
+alias vhalt='vagrant halt'
 
 export EDITOR='emacsclient -t'
 export VISUAL='emacsclient -t'
+
+# Add splunk binaries to PATH
+export SPLUNK_HOME=/opt/splunk
+export PATH=$SPLUNK_HOME/bin:$PATH
+
+# Sun JDK PATH
+export JAVA_HOME=/var/local/oab/src/x64-jdk
+export PATH=$JAVA_HOME/bin:$PATH
+
+moo
