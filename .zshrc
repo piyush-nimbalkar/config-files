@@ -75,6 +75,7 @@ alias moo='fortune | cowthink'
 alias vssh='vagrant ssh'
 alias vup='vagrant up'
 alias vhalt='vagrant halt'
+# alias python=python3
 
 export EDITOR='emacsclient -t'
 export VISUAL='emacsclient -t'
