@@ -42,8 +42,12 @@ COMPLETION_WAITING_DOTS="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git ruby rails extract debian bundler vagrant)
 
+# Zsh related configs
 source $ZSH/oh-my-zsh.sh
 source /usr/share/autojump/autojump.zsh
+
+# Python virtualenv wrapper script
+source /usr/local/bin/virtualenvwrapper.sh
 
 # Customize to your needs...
 export PATH=$PATH:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
@@ -89,3 +93,9 @@ export JAVA_HOME=/var/local/oab/src/x64-jdk
 export PATH=$JAVA_HOME/bin:$PATH
 
 moo
+
+# Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
+
+# To store the virtual envs in a single directory
+export WORKON_HOME=~/.virtualenvs
