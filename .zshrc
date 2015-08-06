@@ -30,7 +30,7 @@ ZSH_THEME="robbyrussell"
 DISABLE_CORRECTION="true"
 
 # Uncomment following line if you want red dots to be displayed while waiting for completion
-COMPLETION_WAITING_DOTS="true"
+# COMPLETION_WAITING_DOTS="true"
 
 # Uncomment following line if you want to disable marking untracked files under
 # VCS as dirty. This makes repository status check for large repositories much,
@@ -79,6 +79,8 @@ alias moo='fortune | cowthink'
 alias vssh='vagrant ssh'
 alias vup='vagrant up'
 alias vhalt='vagrant halt'
+alias python='/usr/bin/python'
+alias gdc='git diff --cached'
 # alias python=python3
 
 export EDITOR='emacsclient -t'
@@ -99,3 +101,17 @@ export PATH="/usr/local/heroku/bin:$PATH"
 
 # To store the virtual envs in a single directory
 export WORKON_HOME=~/.virtualenvs
+
+# Setup zsh-autosuggestions
+source /home/piyush/.zsh-autosuggestions/autosuggestions.zsh
+AUTOSUGGESTION_HIGHLIGHT_COLOR='fg=4'
+# Enable autosuggestions automatically
+zle-line-init() {
+zle autosuggest-start
+}
+
+zle -N zle-line-init
+
+# use ctrl+t to toggle autosuggestions(hopefully this wont be needed as
+# zsh-autosuggestions is designed to be unobtrusive)
+bindkey '^T' autosuggest-toggle
