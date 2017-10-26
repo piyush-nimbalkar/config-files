@@ -2,7 +2,7 @@
 	ui = auto
 [user]
 	name = Piyush Nimbalkar
-	email = piyushmnimbalkar@gmail.com
+	email = piyush@portworx.com
 [alias]
 	pr = pull --rebase
 	co = checkout
