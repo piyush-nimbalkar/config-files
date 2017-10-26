@@ -40,21 +40,11 @@ DISABLE_CORRECTION="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git ruby rails extract debian bundler vagrant)
+plugins=(git golang vagrant sudo docker)
 
 # Zsh related configs
 source $ZSH/oh-my-zsh.sh
 source /usr/share/autojump/autojump.zsh
-
-# Python virtualenv wrapper script
-source /usr/local/bin/virtualenvwrapper.sh
-
-# Customize to your needs...
-export PATH=$PATH:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-
-autoload -U compinit && compinit
 
 autoload up-line-or-beginning-search
 autoload down-line-or-beginning-search
@@ -67,51 +57,38 @@ bindkey "^[[B" down-line-or-beginning-search
 alias s='source ~/.zshrc'
 alias q='exit'
 alias c='clear'
-alias e='emacsclient -t'
+alias e='TERM=xterm-256color emacsclient -t'
 alias ec='emacsclient -c'
 alias emacs-terminal='emacs -nw'
 alias emacs='emacs'
-alias sl='sl'
 alias gs='git status'
 alias cpr='rsync -av --progress'
-alias ....='cd ../../..'
 alias moo='fortune | cowthink'
 alias vssh='vagrant ssh'
 alias vup='vagrant up'
 alias vhalt='vagrant halt'
 alias python='/usr/bin/python'
 alias gdc='git diff --cached'
-# alias python=python3
+alias tmux='TERM=xterm-256color tmux'
+alias p='/home/piyush/workspace/src/github.com/portworx/porx/bin/pxctl'
+export EDITOR='TERM=xterm-256color emacsclient -t'
+export VISUAL=$EDITOR
 
-export EDITOR='emacsclient -t'
-export VISUAL='emacsclient -t'
+export GOROOT=/usr/local/go
+export GOPATH=/home/piyush/workspace
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
-# Add splunk binaries to PATH
-export SPLUNK_HOME=/opt/splunk
-export PATH=$SPLUNK_HOME/bin:$PATH
+export DOCKER_HUB_USER=piyushpx
+export DOCKER_HUB_EMAIL=piyush@portworx.com
+export DOCKER_HUB_REPO=$DOCKER_HUB_USER
+export DOCKER_HUB_IMAGE=porx
+export DOCKER_HUB_TORPEDO_IMAGE=torpedo
+export DOCKER_HUB_TAG=latest
 
-# Sun JDK PATH
-export JAVA_HOME=/var/local/oab/src/x64-jdk
-export PATH=$JAVA_HOME/bin:$PATH
+export KUBECONFIG=$HOME/workspace/px-cluster/admin.conf
 
+# Change C-c (kill) to C-x, so that C-c/C-v could be used to copy/paste
+stty intr ^X
+
+# Check what the cow has to say
 moo
-
-# Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-
-# To store the virtual envs in a single directory
-export WORKON_HOME=~/.virtualenvs
-
-# Setup zsh-autosuggestions
-source /home/piyush/.zsh-autosuggestions/autosuggestions.zsh
-AUTOSUGGESTION_HIGHLIGHT_COLOR='fg=4'
-# Enable autosuggestions automatically
-zle-line-init() {
-zle autosuggest-start
-}
-
-zle -N zle-line-init
-
-# use ctrl+t to toggle autosuggestions(hopefully this wont be needed as
-# zsh-autosuggestions is designed to be unobtrusive)
-bindkey '^T' autosuggest-toggle
