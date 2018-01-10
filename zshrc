@@ -1,15 +1,10 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
+export TERM="xterm-256color"
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
-
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+ZSH_THEME="powerlevel9k/powerlevel9k"
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -44,7 +39,8 @@ plugins=(git golang vagrant sudo docker)
 
 # Zsh related configs
 source $ZSH/oh-my-zsh.sh
-source /usr/share/autojump/autojump.zsh
+# Needed for autojump (Linux)
+# source /usr/share/autojump/autojump.zsh
 
 autoload up-line-or-beginning-search
 autoload down-line-or-beginning-search
@@ -57,10 +53,9 @@ bindkey "^[[B" down-line-or-beginning-search
 alias s='source ~/.zshrc'
 alias q='exit'
 alias c='clear'
-alias e='TERM=xterm-256color emacsclient -t'
+alias e='emacsclient -t'
 alias ec='emacsclient -c'
-alias emacs-terminal='emacs -nw'
-alias emacs='emacs'
+alias emacs='emacsclient -t'
 alias gs='git status'
 alias cpr='rsync -av --progress'
 alias moo='fortune | cowthink'
@@ -69,15 +64,24 @@ alias vup='vagrant up'
 alias vhalt='vagrant halt'
 alias python='/usr/bin/python'
 alias gdc='git diff --cached'
-alias tmux='TERM=xterm-256color tmux'
-alias p='/home/piyush/workspace/src/github.com/portworx/porx/bin/pxctl'
-export EDITOR='TERM=xterm-256color emacsclient -t'
+
+# Portworx aliases
+alias p='$HOME/workspace/src/github.com/portworx/porx/bin/pxctl'
+
+export EDITOR='emacsclient -t'
 export VISUAL=$EDITOR
 
 export GOROOT=/usr/local/go
-export GOPATH=/home/piyush/workspace
+export GOPATH=$HOME/workspace
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
+# Add emacsclient path to $PATH
+export PATH=/Applications/Emacs.app/Contents/MacOS/bin:$PATH
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+
+# Portworx exports
 export DOCKER_HUB_USER=piyushpx
 export DOCKER_HUB_EMAIL=piyush@portworx.com
 export DOCKER_HUB_REPO=$DOCKER_HUB_USER
@@ -85,10 +89,15 @@ export DOCKER_HUB_IMAGE=porx
 export DOCKER_HUB_TORPEDO_IMAGE=torpedo
 export DOCKER_HUB_TAG=latest
 
+export S3_RELEASE_BUCKET=px-dcos
+export S3_BUCKET=px-dcos
+export HTTP_RELEASE_SERVER=https://px-dcos.s3.amazonaws.com
+export GITHUB_TOKEN=4fcf8f36a108f63fa04477ed05d248ae9154011e
+
 export KUBECONFIG=$HOME/workspace/px-cluster/admin.conf
 
-# Change C-c (kill) to C-x, so that C-c/C-v could be used to copy/paste
-stty intr ^X
+# Autojump prefix was not getting loaded (Mac)
+[[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
 
 # Check what the cow has to say
 moo
