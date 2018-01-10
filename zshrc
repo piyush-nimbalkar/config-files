@@ -39,8 +39,6 @@ plugins=(git golang vagrant sudo docker)
 
 # Zsh related configs
 source $ZSH/oh-my-zsh.sh
-# Needed for autojump (Linux)
-# source /usr/share/autojump/autojump.zsh
 
 autoload up-line-or-beginning-search
 autoload down-line-or-beginning-search
