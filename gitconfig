@@ -13,5 +13,6 @@
 	last = log -1 HEAD
 	unstage = reset HEAD --
 	lol = log --oneline --graph --decorate --all
+	cp = cherry-pick
 [push]
 	default = upstream
