@@ -35,7 +35,7 @@ DISABLE_CORRECTION="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git golang vagrant sudo docker)
+plugins=(git golang vagrant sudo docker kubectl)
 
 # Zsh related configs
 source $ZSH/oh-my-zsh.sh
@@ -65,6 +65,13 @@ alias gdc='git diff --cached'
 
 # Portworx aliases
 alias p='$HOME/workspace/src/github.com/portworx/porx/bin/pxctl'
+alias kk='kubectl'
+alias kn='kubectl -n kube-system'
+
+function pk () {
+     pxpod=$(kubectl -n kube-system get pods | grep portworx- | grep Running | head -n1 | cut -d' ' -f1)
+     kubectl -n kube-system exec -it $pxpod /opt/pwx/bin/pxctl -- $@
+}
 
 export EDITOR='emacsclient -t'
 export VISUAL=$EDITOR
@@ -88,11 +95,16 @@ export DOCKER_HUB_TORPEDO_IMAGE=torpedo
 export DOCKER_HUB_TAG=latest
 
 export S3_RELEASE_BUCKET=px-dcos
-export S3_BUCKET=px-dcos
 export HTTP_RELEASE_SERVER=https://px-dcos.s3.amazonaws.com
 export GITHUB_TOKEN=4fcf8f36a108f63fa04477ed05d248ae9154011e
+export S3_BUCKET=piyush-dcos
+export S3_DIR_PATH=try40
 
-export KUBECONFIG=$HOME/workspace/px-cluster/admin.conf
+# DCOS cluster
+export DCOS_GENERATE_CONFIG_PATH=dcos_generate_config.ee.sh
+export DCOS_CONFIG_PATH=etc/config-1.11.yaml
+
+export KUBECONFIG=$HOME/workspace/src/github.com/vagrant-kube/admin.conf
 
 # Autojump prefix was not getting loaded (Mac)
 [[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
