@@ -1,10 +1,15 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 export TERM="xterm-256color"
 
-ZSH_THEME="powerlevel9k/powerlevel9k"
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -35,7 +40,7 @@ DISABLE_CORRECTION="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git golang vagrant sudo docker kubectl)
+plugins=(git golang vagrant sudo docker kubectl zsh-syntax-highlighting zsh-autosuggestions)
 
 # Zsh related configs
 source $ZSH/oh-my-zsh.sh
@@ -96,7 +101,6 @@ export DOCKER_HUB_TAG=latest
 
 export S3_RELEASE_BUCKET=px-dcos
 export HTTP_RELEASE_SERVER=https://px-dcos.s3.amazonaws.com
-export GITHUB_TOKEN=4fcf8f36a108f63fa04477ed05d248ae9154011e
 export S3_BUCKET=piyush-dcos
 export S3_DIR_PATH=try40
 
@@ -111,3 +115,6 @@ export KUBECONFIG=$HOME/workspace/src/github.com/vagrant-kube/admin.conf
 
 # Check what the cow has to say
 moo
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
