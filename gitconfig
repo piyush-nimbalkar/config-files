@@ -2,7 +2,7 @@
 	ui = auto
 [user]
 	name = Piyush Nimbalkar
-	email = piyush@portworx.com
+	email = pnimbalkar@purestorage.com
 [alias]
 	pr = pull --rebase
 	co = checkout
@@ -14,5 +14,10 @@
 	unstage = reset HEAD --
 	lol = log --oneline --graph --decorate --all
 	cp = cherry-pick
+	cs = commit -s
 [push]
 	default = upstream
+[core]
+	pager = less -+F
+[url "git@github.com:"]
+	insteadOf = https://github.com/

@@ -74,8 +74,12 @@ alias kk='kubectl'
 alias kn='kubectl -n kube-system'
 
 function pk () {
-     pxpod=$(kubectl -n kube-system get pods | grep portworx- | grep Running | head -n1 | cut -d' ' -f1)
-     kubectl -n kube-system exec -it $pxpod /opt/pwx/bin/pxctl -- $@
+    pxpod=$(kubectl -n kube-system get pods | grep portworx- | grep Running | head -n1 | cut -d' ' -f1)
+    kubectl -n kube-system exec -it $pxpod /opt/pwx/bin/pxctl -- $@
+}
+
+function cssh () {
+    sshpass -pPassword1 ssh -o StrictHostKeyChecking=no root@$1
 }
 
 export EDITOR='emacsclient -t'
@@ -97,21 +101,47 @@ export DOCKER_HUB_EMAIL=piyush@portworx.com
 export DOCKER_HUB_REPO=$DOCKER_HUB_USER
 export DOCKER_HUB_IMAGE=porx
 export DOCKER_HUB_TORPEDO_IMAGE=torpedo
+export DOCKER_HUB_WEBSVC_IMAGE=monitor-websvc
+export DOCKER_HUB_OPERATOR_IMG=px-operator
+export DOCKER_HUB_OPERATOR_TAG=latest
+export DOCKER_HUB_OPERATOR_TEST_IMG=px-operator-test
+export DOCKER_HUB_OPERATOR_TEST_TAG=latest
+export DOCKER_HUB_BUNDLE_IMG=portworx-certified-bundle
+export DOCKER_HUB_REGISTRY_IMG=px-operator-registry
+export DOCKER_HUB_STORK_IMAGE=stork
+export DOCKER_HUB_STORK_TAG=latest
+export DOCKER_HUB_CMD_EXECUTOR_IMAGE=cmdexecutor
+export DOCKER_HUB_CMD_EXECUTOR_TAG=latest
 export DOCKER_HUB_TAG=latest
+export QUAY_STORAGE_OPERATOR_REPO=piyushpx
+export QUAY_STORAGE_OPERATOR_APP=portworx
 
+export RELEASE_UNIVERSE_REPO="portworx/universe"
 export S3_RELEASE_BUCKET=px-dcos
 export HTTP_RELEASE_SERVER=https://px-dcos.s3.amazonaws.com
 export S3_BUCKET=piyush-dcos
 export S3_DIR_PATH=try40
 
 # DCOS cluster
-export DCOS_GENERATE_CONFIG_PATH=dcos_generate_config.ee.sh
-export DCOS_CONFIG_PATH=etc/config-1.11.yaml
+export DCOS_GENERATE_CONFIG_PATH=installers/dcos/dcos_generate_config-1.12.0-ee.sh
+export DCOS_CONFIG_PATH=etc/config-1.12.yaml
+export DCOS_SSL_VERIFY=false
 
-export KUBECONFIG=$HOME/workspace/src/github.com/vagrant-kube/admin.conf
+# KOPS cluster
+export KOPS_STATE_STORE=gs://piyush-kubernetes-clusters/
+alias gssh='gcloud compute --project "portworx-eng" ssh --zone "us-central1-a"'
+
+# Kubernetes config
+export KUBECONFIG=/home/admin/.kube/config
 
 # Autojump prefix was not getting loaded (Mac)
-[[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
+# [[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/admin/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '/home/admin/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/admin/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/home/admin/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
 # Check what the cow has to say
 moo
